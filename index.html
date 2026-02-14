@@ -34,7 +34,7 @@ body {
     padding:30px;
     margin:30px auto;
     width:90%;
-    max-width:500px;
+    max-width:600px;
     border-radius:20px;
     backdrop-filter: blur(15px);
 }
@@ -52,10 +52,18 @@ button {
 .yes {background:#4CAF50;color:white;}
 .no {background:#f44336;color:white;}
 
-img {
-    max-width:100%;
+/* Pictures */
+.gallery {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
     margin-top:15px;
+}
+.gallery img {
+    width:30%;
     border-radius:15px;
+    max-width:180px;
 }
 
 /* Snow & Hearts */
@@ -112,8 +120,12 @@ for(let i=0;i<60;i++){
 <div class="box" id="mainContent">
     <h2 id="typing"></h2>
 
-    <input type="file" accept="image/*" onchange="loadImage(event)">
-    <img id="preview">
+    <!-- 3 Pictures -->
+    <div class="gallery">
+        <img src="photo1.jpg" alt="Photo 1">
+        <img src="photo2.jpg" alt="Photo 2">
+        <img src="photo3.jpg" alt="Photo 3">
+    </div>
 
     <h3>Will you forgive me?</h3>
     <button class="yes" onclick="forgive()">Yes ❤️</button>
@@ -144,7 +156,7 @@ function checkPassword(){
 }
 
 function typeMessage(){
-    let text="I’m really sorry… I never meant to hurt you. You are my favorite person. I’m trying now… you will see surprises soon ✨";
+    let text="I’m really sorry… I never wanted to hurt you. I feel awful knowing I ruined your day. You mean so much to me, and I promise to try harder. Every memory with you is precious, and I hope these little surprises make you smile. ✨";
     let i=0;
     function typing(){
         if(i<text.length){
@@ -154,10 +166,6 @@ function typeMessage(){
         }
     }
     typing();
-}
-
-function loadImage(event){
-    document.getElementById("preview").src=URL.createObjectURL(event.target.files[0]);
 }
 
 /* Runaway No Button */
@@ -173,7 +181,7 @@ function forgive(){
     document.getElementById("response").innerHTML=`
         <h3>YOU FORGAVE ME 🤍</h3>
         <p>Best friend / thambi forever even after death 🤍</p>
-        <p>Your chocolate daddy will always adore you 🍫😌</p>
+        <p>You are amazing, and your chocolate daddy will always adore you 🍫😌</p>
     `;
     launchFireworks();
 }
