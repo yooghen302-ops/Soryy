@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forgive Me 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* Floating Envelope */
+.envelope {
+    font-size:100px;
+    margin-top:120px;
+    cursor:pointer;
+    animation: float 3s infinite;
+}
+@keyframes float {
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+    100%{transform:translateY(0);}
+}
+
+/* Glass box */
+.box {
+    display:none;
+    background: rgba(255,255,255,0.1);
+    padding:30px;
+    margin:30px auto;
+    width:90%;
+    max-width:500px;
+    border-radius:20px;
+    backdrop-filter: blur(15px);
+}
+
+/* Buttons */
+button {
+    padding:10px 20px;
+    margin:10px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    position:relative;
+}
+.yes {background:#4CAF50;color:white;}
+.no {background:#f44336;color:white;}
+
+img {
+    max-width:100%;
+    margin-top:15px;
+    border-radius:15px;
+}
+
+/* Snow & Hearts */
+.fall {
+    position: fixed;
+    top:-10px;
+    font-size:14px;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    to { transform: translateY(100vh); }
+}
+
+/* Fireworks */
+.firework {
+    position:fixed;
+    font-size:20px;
+    animation: boom 1s ease-out forwards;
+}
+@keyframes boom {
+    to {
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* Snow + Hearts */
+for(let i=0;i<60;i++){
+    let el=document.createElement("div");
+    el.className="fall";
+    el.innerHTML=Math.random()>0.5?"❄":"💕";
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(Math.random()*5+5)+"s";
+    el.style.opacity=Math.random();
+    document.body.appendChild(el);
+}
+</script>
+
+<div class="envelope" onclick="openLetter()">✉️</div>
+<p>Tap the envelope 🤍</p>
+
+<div class="box" id="loginBox">
+    <h2>Password 🔐</h2>
+    <input type="password" id="password">
+    <br>
+    <button onclick="checkPassword()">Open</button>
+</div>
+
+<div class="box" id="mainContent">
+    <h2 id="typing"></h2>
+
+    <input type="file" accept="image/*" onchange="loadImage(event)">
+    <img id="preview">
+
+    <h3>Will you forgive me?</h3>
+    <button class="yes" onclick="forgive()">Yes ❤️</button>
+    <button class="no" id="noBtn" onmouseover="runAway()">No 💔</button>
+
+    <div id="response"></div>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openLetter(){
+    document.querySelector(".envelope").style.display="none";
+    document.getElementById("loginBox").style.display="block";
+}
+
+function checkPassword(){
+    if(document.getElementById("password").value==="sree-is-the-best"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+        document.getElementById("bgMusic").play();
+        typeMessage();
+    } else {
+        alert("Wrong password 😢");
+    }
+}
+
+function typeMessage(){
+    let text="I’m really sorry… I never meant to hurt you. You are my favorite person. I’m trying now… you will see surprises soon ✨";
+    let i=0;
+    function typing(){
+        if(i<text.length){
+            document.getElementById("typing").innerHTML+=text.charAt(i);
+            i++;
+            setTimeout(typing,50);
+        }
+    }
+    typing();
+}
+
+function loadImage(event){
+    document.getElementById("preview").src=URL.createObjectURL(event.target.files[0]);
+}
+
+/* Runaway No Button */
+function runAway(){
+    let btn=document.getElementById("noBtn");
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+}
+
+/* Fireworks when Yes */
+function forgive(){
+    document.getElementById("response").innerHTML=`
+        <h3>YOU FORGAVE ME 🤍</h3>
+        <p>Best friend / thambi forever even after death 🤍</p>
+        <p>Your chocolate daddy will always adore you 🍫😌</p>
+    `;
+    launchFireworks();
+}
+
+function launchFireworks(){
+    for(let i=0;i<30;i++){
+        let fw=document.createElement("div");
+        fw.className="firework";
+        fw.innerHTML="✨";
+        fw.style.left=Math.random()*100+"vw";
+        fw.style.top=Math.random()*100+"vh";
+        document.body.appendChild(fw);
+        setTimeout(()=>fw.remove(),1000);
+    }
+}
+</script>
+
+</body>
+</html>
